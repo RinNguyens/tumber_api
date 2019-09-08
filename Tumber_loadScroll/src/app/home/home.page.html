@@ -1,0 +1,36 @@
+<ion-app>
+  <ion-header translucent>
+    <ion-toolbar color="primary">
+      <ion-title>Card</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content fullscreen>
+    <div *ngFor="let user of users">
+      <div *ngFor="let post of user.posts">
+        <div *ngFor="let photo of post.photos">
+            <ion-card>
+                <img [src]="photo.original_size.url" />
+                <ion-card-header>
+                  <ion-card-subtitle>{{post.source_title}}</ion-card-subtitle>
+                  <ion-card-title>{{post.blog_name}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                 {{post.caption}}
+                </ion-card-content>
+              </ion-card>
+              <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+                  <ion-infinite-scroll-content
+                    loadingSpinner="bubbles"
+                    loadingText="Loading more data...">
+                  </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+  <ion-footer translucent>
+    <ion-toolbar color="success">
+      <ion-title>Footer</ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>
